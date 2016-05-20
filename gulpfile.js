@@ -12,8 +12,7 @@ gulp.task('js', function () {
 		.pipe(react())
     .pipe(concat('app.js'))
     .pipe(browserify({
-		  insertGlobals : true,
-		  debug : !gulp.env.production
+		  insertGlobals : true
 		}))
 		.pipe(gulp.dest('dist/js'));
 });
