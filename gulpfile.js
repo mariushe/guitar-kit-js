@@ -8,7 +8,7 @@ gulp.task('html', function () {
 		.pipe(gulp.dest('dist'));
 });
 gulp.task('js', function () {
-	return gulp.src('app/js/**/*.jsx')
+	return gulp.src('app/js/**/*')
 		.pipe(react())
     .pipe(concat('app.js'))
     .pipe(browserify({

@@ -1,5 +1,6 @@
 var React = require('react');
-var ReactDOM = require('react-dom');
+var render = require('react-dom').render;
+var Theory = require('./theory');
 
 // ReactDOM.render(
 //   <h1>Hello, world!</h1>,
@@ -17,7 +18,7 @@ var Fretboard = React.createClass({
   }
 });
 
-ReactDOM.render(
+render(
   <Fretboard />,
   document.getElementById('example')
 );
