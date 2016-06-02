@@ -1,17 +1,7 @@
 var React = require('react');
 var render = require('react-dom').render;
 var Theory = require('./theory');
-
-
-var tmpData = [[{"note": "E"}, {"note": "F"}], [{"note": "A"}], [{"note": "D"}]];
-
-var forEachCreate = function(toProcess, creator) {
-  var arr = [];
-  toProcess.forEach(function(elem) {
-    arr.push(creator(elem));
-  });
-  return arr;
-}
+var Generator = require('./generator');
 
 var Fret = React.createClass({
   render: function() {
@@ -25,33 +15,36 @@ var Fret = React.createClass({
 
 var String = React.createClass({
   render: function() {
-    var frets = forEachCreate(this.props.string, function(fret) {
-      return <Fret fret={fret}/>;
-    });
     return (
       <div className="string">
-        {frets}
+        {this.props.string.map(function(fret, i) {
+          return <Fret fret={fret} key={i}/>;
+        })}
       </div>
     );
   }
 });
 
 
-
 var Fretboard = React.createClass({
+  getInitialState: function() {
+    return {
+      fretboard: Generator.createFretboard()
+    };
+  },
+
   render: function() {
-    var strings = forEachCreate(this.props.fretboard, function(str) {
-      return <String string={str}/>;
-    });
     return (
       <div className="fretboard">
-        {strings}
+        {this.state.fretboard.map(function(str, i) {
+          return <String string={str} key={i}/>;
+        })}
       </div>
     );
   }
 });
 
 render(
-  <Fretboard fretboard={tmpData}/>,
+  <Fretboard/>,
   document.getElementById('example')
 );
